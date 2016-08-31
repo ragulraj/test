@@ -1,0 +1,45 @@
+
+tibco:
+  connection:
+    url: ssl://gtgtc-esbla02d.nam.nsroot.net:31243
+    username: apigl_dev_usr
+    password: apiglusr
+    ssl-password: apiglusr
+    ssl-auth-only: true
+    ssl-trace: true
+    ssl-enable-verify-host-name: true
+    request-destination: citi.gcg.gom.esb_169068.rg.ExceptionQ.3
+    session-cache-size: 10
+    ssl-identity: apigl_dev_usr.ca1.cert.p12
+    ssl-trusted-certificate: apigl_dev_usr.ca1.cert.pem
+    ssl-enable-verify-host: false
+
+ccp:
+  ids:
+    logger:
+      soapaction: /Services/SecurityEventsLoggerService.serviceagent/PortTypeEndpoint1/reportEvents
+  cert:
+    jms:
+      label: configrepo(_)idssink(_)jmscerts
+
+
+
+jms:  
+  container:
+    concurrent-consumers: 10
+    receive-timeout: 50000
+    
+eureka:
+  client:    
+    enabled: true
+    registryFetchIntervalSeconds: 5    
+    serviceUrl:
+      defaultZone: ${vcap.services.${PREFIX:}eurekaURL.credentials.uri:http://user:password@localhost:8761}/eureka/
+  instance:    
+    hostname: localhost
+    securePortEnabled: false
+    nonSecurePortEnabled: true
+    preferIpAddress: false 
+    securePort: 9001   
+    metadataMap:
+     instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}
