@@ -1,0 +1,4 @@
+jms:  
+  container:
+    concurrent-consumers: 10
+    receive-timeout: 50000
